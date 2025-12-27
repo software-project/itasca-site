@@ -1,0 +1,73 @@
+{% load static wagtailcore_tags wagtailuserbar %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>
+        {% block title %}
+        {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+        {% endblock %}
+        {% block title_suffix %}
+        {% wagtail_site as current_site %}
+        {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
+        {% endblock %}
+    </title>
+    {% if page.search_description %}
+    <meta name="description" content="{{ page.search_description }}" />
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {# Force all links in the live preview panel to be opened in a new tab #}
+    {% if request.in_preview_panel %}
+    <base target="_blank">
+    {% endif %}
+
+    {# Global stylesheets #}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/itasca.css' %}">
+
+    {% block extra_css %}
+    {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+    {% wagtailuserbar %}
+
+    <div id="root">
+        <div role="region" aria-label="Notifications (F8)" tabindex="-1" style="pointer-events: none;">
+            <ol tabindex="-1"
+                class="fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]">
+            </ol>
+        </div>
+        <section aria-label="Notifications alt+T" tabindex="-1" aria-live="polite" aria-relevant="additions text"
+            aria-atomic="false"></section>
+        <div class="flex flex-col min-h-screen bg-beige">
+            {% include "includes/header.html" %}
+            <main class="flex-grow">
+                
+                {% block content %}{% endblock %}
+                <section class="bg-navy text-beige py-16 sm:py-24">
+                    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <h2 class="text-3xl sm:text-4xl font-serif font-light text-coral mb-6">Gotowy na Zmianę?</h2>
+                        <p class="text-lg text-beige/90 mb-8 max-w-2xl mx-auto">Skontaktuj się z nami dziś i dowiedz
+                            się, jak możemy pomóc Twojej firmie w kwestiach podatkowych.</p><a
+                            class="inline-flex items-center justify-center bg-coral hover:bg-coral/90 text-navy font-semibold py-3 px-8 rounded transition-colors text-lg"
+                            href="/contacts">Umów się na konsultację</a>
+                    </div>
+                </section>
+            </main>
+            {% include "includes/footer.html" %}
+        </div>
+    </div>
+
+    {# Global javascript #}
+    <script type="text/javascript" src="{% static 'js/itasca.js' %}"></script>
+
+    {% block extra_js %}
+    {# Override this in templates to add extra javascript #}
+    {% endblock %}
+</body>
+
+</html>

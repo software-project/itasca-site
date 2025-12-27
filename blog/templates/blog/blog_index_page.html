@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-blogindexpage{% endblock %}
+
+{% block content %}
+
+<main class="flex-grow">
+    <section class="bg-gradient-to-br from-navy via-navy to-navy/95 text-beige py-16 sm:py-24">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-light mb-6 text-coral">{{ page.title }}</h1>
+            <p class="text-lg sm:text-xl text-beige/90 max-w-2xl">{{ page.intro|richtext }}</p>
+        </div>
+    </section>
+    <section class="bg-beige py-16 sm:py-24">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for post in page.get_children %}
+                    <article class="bg-white rounded-lg overflow-hidden border border-coral/20 hover:shadow-lg transition-shadow flex flex-col">
+                        <div class="bg-beige/10 p-6 flex-grow">
+                            <div class="flex items-center gap-2 mb-3">
+                                {% with tags=post.specific.tags.all %}
+                                    {% if tags %}
+                                        {% for tag in tags %}
+                                            <!-- <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a> -->
+                                            <span class="text-xs font-semibold text-coral bg-coral/10 px-3 py-1 rounded">{{ tag }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                            <h2 class="text-xl font-semibold text-navy mb-3 line-clamp-2"><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+                            <p class="text-navy/70 text-sm line-clamp-3">{{ post.specific.intro }}</p>
+                        </div>
+                        <div class="px-6 py-4 bg-coral/10 border-t border-coral/10">
+                            <div class="flex items-center gap-4 text-xs text-navy/60 mb-4">
+                                <div class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                        height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar"
+                                        aria-hidden="true">
+                                        <path d="M8 2v4"></path>
+                                        <path d="M16 2v4"></path>
+                                        <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                        <path d="M3 10h18"></path>
+                                    </svg>{{ post.specific.date }}</div>
+                                <div class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                        height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user"
+                                        aria-hidden="true">
+                                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>Zespół Itasca</div>
+                            </div><a href="{% pageurl post %}" class="text-coral font-semibold text-sm hover:text-coral/80 transition-colors">
+                                Czytaj więcej
+                                →</a>
+                        </div>
+                    </article>
+                {% endfor %}
+                
+            </div>
+            <div class="mt-12 text-center">
+                <p class="text-navy/70 text-lg">Więcej artykułów wkrótce. Zasubskrybuj, aby być na bieżąco.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

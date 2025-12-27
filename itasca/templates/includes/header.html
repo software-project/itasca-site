@@ -1,0 +1,17 @@
+{% load static %}
+<header class="bg-navy text-beige sticky top-0 z-50 border-b border-coral/20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="flex items-center justify-between">
+            <a class="flex items-center gap-2" href="/">
+                <img src="{% static 'src/itasca.svg' %}?v=2" alt="itasca" class="h-8 sm:h-10"></a>
+            <nav class="flex items-center gap-1 sm:gap-8"><a
+                    class="text-sm sm:text-base px-3 sm:px-0 py-2 transition-colors text-coral font-semibold"
+                    href="/">Home</a><a
+                    class="text-sm sm:text-base px-3 sm:px-0 py-2 transition-colors text-beige hover:text-coral"
+                    href="/blog">Blog</a><a
+                    class="text-sm sm:text-base px-3 sm:px-0 py-2 transition-colors text-beige hover:text-coral"
+                    href="/contacts">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+</header>

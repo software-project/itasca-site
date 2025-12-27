@@ -1,0 +1,50 @@
+<footer class="bg-navy text-beige border-t border-coral/20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <h3 class="text-xl font-serif font-light text-coral mb-4">itasca</h3>
+                <p class="text-beige/80 text-sm">Profesjonalna kancelaria doradztwa podatkowego, wspierająca
+                    przedsiębiorców w kwestiach podatkowych i rachunkowych.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-coral mb-4">Nawigacja</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a class="text-beige/80 hover:text-coral transition-colors" href="/">Strona
+                            główna</a></li>
+                    <li><a class="text-beige/80 hover:text-coral transition-colors" href="/blog">Blog</a>
+                    </li>
+                    <li><a class="text-beige/80 hover:text-coral transition-colors" href="/contacts">Kontakt</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-coral mb-4">Kontakt</h4>
+                <div class="text-sm space-y-2 text-beige/80">
+                    <p><span class="font-semibold">Tel:</span> +48 XXX XXX XXX</p>
+                    <p><span class="font-semibold">Email:</span> <a href="mailto:info@itasca.pl"
+                            class="hover:text-coral transition-colors">info@itasca.pl</a></p>
+                    <p><span class="font-semibold">Adres:</span> Poznań</p>
+                </div>
+                {% with linkedin_url=settings.home.NavigationSettings.linkedin_url github_url=settings.home.NavigationSettings.github_url mastodon_url=settings.home.NavigationSettings.mastodon_url %}
+                    {% if linkedin_url or github_url or mastodon_url %}
+                        <p>
+                            Follow me on:
+                            {% if github_url %}
+                                <a href="{{ github_url }}">GitHub</a>
+                            {% endif %}
+                            {% if linkedin_url %}
+                                <a href="{{ linkedin_url }}">LinkedIn</a>
+                            {% endif %}
+                            {% if mastodon_url %}
+                                <a href="{{ mastodon_url }}">Mastodon</a>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="border-t border-coral/20 pt-8">
+            <p class="text-center text-beige/60 text-sm">© 2025 Itasca - Kancelaria Doradztwa Podatkowego.
+                Wszelkie prawa zastrzeżone.</p>
+        </div>
+    </div>
+</footer>
