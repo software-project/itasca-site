@@ -12,12 +12,13 @@ services:
     volumes:
       - ./media:/app/media
       - ./static:/app/static
-      - ./db.sqlite3:/app/db.sqlite3  # Remove if using PostgreSQL
+      # Remove the db.sqlite3 volume line
     ports:
       - "127.0.0.1:8000:8000"
+    depends_on:
+      - db
     command: gunicorn itasca.wsgi:application --bind 0.0.0.0:8000 --workers 3
 
-  # Optional: PostgreSQL (recommended for production)
   db:
     image: postgres:17
     container_name: itasca_db
@@ -25,9 +26,12 @@ services:
     environment:
       POSTGRES_DB: itasca_db
       POSTGRES_USER: itasca_user
-      POSTGRES_PASSWORD: your-db-password
+      POSTGRES_PASSWORD: ${DB_PASSWORD}  # Read from .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    # Optional: expose port for external access (not needed if only accessed from web container)
+    # ports:
+    #   - "127.0.0.1:5432:5432"
 
 volumes:
   postgres_data:
