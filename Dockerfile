@@ -38,13 +38,8 @@ RUN pip install "gunicorn==20.0.4"
 COPY requirements.txt /
 RUN pip install -r /requirements.txt
 
-# Use /app folder as a directory where the source code is stored.
-WORKDIR /app
-
-# Set this directory to be owned by the "wagtail" user. This Wagtail project
-# uses SQLite, the folder needs to be owned by the user that
-# will be writing to the database file.
-RUN chown wagtail:wagtail /app
+# Use /home/ubuntu/itasca as the working directory where the source code is stored.
+WORKDIR /home/ubuntu/itasca
 
 # Copy the source code of the project into the container.
 COPY --chown=wagtail:wagtail . .
@@ -53,7 +48,7 @@ COPY --chown=wagtail:wagtail . .
 RUN node --version && npm --version
 
 # Ensure CSS output directory exists
-RUN mkdir -p /home/ubuntu/itasca/static/css && chown wagtail:wagtail /home/ubuntu/itasca/static/css
+RUN mkdir -p /home/ubuntu/itasca/itasca/static/css && chown wagtail:wagtail /home/ubuntu/itasca/itasca/static/css
 
 # Install npm dependencies and build CSS (as root, before switching users)
 RUN npm ci --legacy-peer-deps || npm install --legacy-peer-deps
