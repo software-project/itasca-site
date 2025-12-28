@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Itasca Wagtail project",
   "scripts": {
-    "build:css": "tailwindcss -i ./itasca/static/src/css/itasca.css -o ./itasca/static/css/itasca.css --minify",
-    "watch:css": "tailwindcss -i ./itasca/static/src/css/itasca.css -o ./itasca/static/css/itasca.css --watch"
+    "build:css": "npx tailwindcss -i ./itasca/static/src/css/itasca.css -o ./itasca/static/css/itasca.css --minify",
+    "watch:css": "npx tailwindcss -i ./itasca/static/src/css/itasca.css -o ./itasca/static/css/itasca.css --watch"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.1",

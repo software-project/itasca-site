@@ -54,8 +54,8 @@ RUN mkdir -p /home/ubuntu/www/itasca/itasca/static/css && chown wagtail:wagtail 
 RUN npm ci --legacy-peer-deps || npm install --legacy-peer-deps
 RUN npm run build:css
 
-# Fix ownership of node_modules and generated CSS files
-RUN chown -R wagtail:wagtail /home/ubuntu/www/itasca/node_modules /home/ubuntu/www/itasca/static/css
+# Fix ownership of the entire working directory (including node_modules and generated files)
+RUN chown -R wagtail:wagtail /home/ubuntu/www/itasca
 
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail
