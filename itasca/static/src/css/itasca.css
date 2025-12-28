@@ -126,14 +126,14 @@
   }
 }
 
-@layer utilities {
+@layer components {
   /* Ensure text-justify and text-balance work properly - always included */
-  p.text-justify,
+  main .text-justify,
   .text-justify {
     text-align: justify !important;
   }
   
-  p.text-balance,
+  main .text-balance,
   .text-balance {
     text-wrap: balance;
     /* Fallback for browsers that don't support text-wrap: balance */
@@ -141,7 +141,11 @@
   }
   
   /* Specific rule for #about-us to ensure it works */
-  #about-us.text-justify {
+  #about-us {
     text-align: justify !important;
   }
+}
+
+#about-us{
+  text-align: justify !important;
 }
