@@ -28,7 +28,8 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
 
 # Install Node.js (LTS version)
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install the application server.
 RUN pip install "gunicorn==20.0.4"
@@ -48,11 +49,21 @@ RUN chown wagtail:wagtail /app
 # Copy the source code of the project into the container.
 COPY --chown=wagtail:wagtail . .
 
+# Verify Node.js and npm are installed
+RUN node --version && npm --version
+
+# Ensure CSS output directory exists
+RUN mkdir -p /home/ubuntu/itasca/static/css && chown wagtail:wagtail /home/ubuntu/itasca/static/css
+
+# Install npm dependencies and build CSS (as root, before switching users)
+RUN npm ci --legacy-peer-deps || npm install --legacy-peer-deps
+RUN npm run build:css
+
+# Fix ownership of node_modules and generated CSS files
+RUN chown -R wagtail:wagtail /home/ubuntu/itasca/node_modules /home/ubuntu/itasca/static/css
+
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail
-
-# Install npm dependencies and build CSS
-RUN npm install && npm run build:css
 
 # Collect static files.
 RUN python manage.py collectstatic --noinput --clear
