@@ -1,12 +1,29 @@
 from .base import *
+import os
+from pathlib import Path
 
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-# ManifestStaticFilesStorage is recommended in production, to prevent
-# outdated JavaScript / CSS assets being served from cache
-# (e.g. after a Wagtail upgrade).
-# See https://docs.djangoproject.com/en/5.2/ref/contrib/staticfiles/#manifeststaticfilesstorage
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
+# Database configuration (if using PostgreSQL)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'itasca_db'),
+        'USER': os.environ.get('DB_USER', 'itasca_user'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
+    }
+}
+
+# ManifestStaticFilesStorage is recommended in production
 STORAGES["staticfiles"]["BACKEND"] = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+
+WAGTAILADMIN_BASE_URL = os.environ.get('WAGTAILADMIN_BASE_URL', 'https://yourdomain.com')
 
 try:
     from .local import *

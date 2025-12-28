@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: itasca_web
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - DJANGO_SETTINGS_MODULE=itasca.settings.production
+    volumes:
+      - ./media:/app/media
+      - ./static:/app/static
+      - ./db.sqlite3:/app/db.sqlite3  # Remove if using PostgreSQL
+    ports:
+      - "127.0.0.1:8000:8000"
+    command: gunicorn itasca.wsgi:application --bind 0.0.0.0:8000 --workers 3
+
+  # Optional: PostgreSQL (recommended for production)
+  db:
+    image: postgres:17
+    container_name: itasca_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: itasca_db
+      POSTGRES_USER: itasca_user
+      POSTGRES_PASSWORD: your-db-password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

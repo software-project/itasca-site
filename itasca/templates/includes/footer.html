@@ -3,8 +3,8 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
                 <h3 class="text-xl font-serif font-light text-coral mb-4">itasca</h3>
-                <p class="text-beige/80 text-sm">Profesjonalna kancelaria doradztwa podatkowego, wspierająca
-                    przedsiębiorców w kwestiach podatkowych i rachunkowych.</p>
+                <p class="text-beige/80 text-sm">Kancelaria doradztwa podatkowego.
+                    Odopowiedzialne doradztwo podatkowe dla przedsiębiorców i osób fizycznych w całej Polsce.</p>
             </div>
             <div>
                 <h4 class="font-semibold text-coral mb-4">Nawigacja</h4>
@@ -13,18 +13,16 @@
                             główna</a></li>
                     <li><a class="text-beige/80 hover:text-coral transition-colors" href="/blog">Blog</a>
                     </li>
-                    <li><a class="text-beige/80 hover:text-coral transition-colors" href="/contacts">Kontakt</a></li>
                 </ul>
             </div>
-            <div>
+            <div id="kontakt">
                 <h4 class="font-semibold text-coral mb-4">Kontakt</h4>
                 <div class="text-sm space-y-2 text-beige/80">
-                    <p><span class="font-semibold">Tel:</span> +48 XXX XXX XXX</p>
-                    <p><span class="font-semibold">Email:</span> <a href="mailto:info@itasca.pl"
-                            class="hover:text-coral transition-colors">info@itasca.pl</a></p>
-                    <p><span class="font-semibold">Adres:</span> Poznań</p>
+                    <p><span class="font-semibold">Tel:</span> +48 570 157 170</p>
+                    <p><span class="font-semibold">Email:</span> <a href="mailto:kancelaria@itasca.pl"
+                            class="hover:text-coral transition-colors">kancelaria@itasca.pl</a></p>
                 </div>
-                {% with linkedin_url=settings.home.NavigationSettings.linkedin_url github_url=settings.home.NavigationSettings.github_url mastodon_url=settings.home.NavigationSettings.mastodon_url %}
+                <!-- {% with linkedin_url=settings.home.NavigationSettings.linkedin_url github_url=settings.home.NavigationSettings.github_url mastodon_url=settings.home.NavigationSettings.mastodon_url %}
                     {% if linkedin_url or github_url or mastodon_url %}
                         <p>
                             Follow me on:
@@ -39,7 +37,7 @@
                             {% endif %}
                         </p>
                     {% endif %}
-                {% endwith %}
+                {% endwith %} -->
             </div>
         </div>
         <div class="border-t border-coral/20 pt-8">
