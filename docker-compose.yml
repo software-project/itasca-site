@@ -10,8 +10,8 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=itasca.settings.production
     volumes:
-      - ./media:/home/ubuntu/itasca/media
-      - ./static:/home/ubuntu/itasca/static
+      - ./media:/home/ubuntu/www/itasca/media
+      - ./static:/home/ubuntu/www/itasca/static
       # Remove the db.sqlite3 volume line
     ports:
       - "127.0.0.1:8000:8000"

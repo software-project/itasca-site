@@ -38,8 +38,8 @@ RUN pip install "gunicorn==20.0.4"
 COPY requirements.txt /
 RUN pip install -r /requirements.txt
 
-# Use /home/ubuntu/itasca as the working directory where the source code is stored.
-WORKDIR /home/ubuntu/itasca
+# Use /home/ubuntu/www/itasca as the working directory where the source code is stored.
+WORKDIR /home/ubuntu/www/itasca
 
 # Copy the source code of the project into the container.
 COPY --chown=wagtail:wagtail . .
@@ -48,14 +48,14 @@ COPY --chown=wagtail:wagtail . .
 RUN node --version && npm --version
 
 # Ensure CSS output directory exists
-RUN mkdir -p /home/ubuntu/itasca/itasca/static/css && chown wagtail:wagtail /home/ubuntu/itasca/itasca/static/css
+RUN mkdir -p /home/ubuntu/www/itasca/itasca/static/css && chown wagtail:wagtail /home/ubuntu/www/itasca/itasca/static/css
 
 # Install npm dependencies and build CSS (as root, before switching users)
 RUN npm ci --legacy-peer-deps || npm install --legacy-peer-deps
 RUN npm run build:css
 
 # Fix ownership of node_modules and generated CSS files
-RUN chown -R wagtail:wagtail /home/ubuntu/itasca/node_modules /home/ubuntu/itasca/static/css
+RUN chown -R wagtail:wagtail /home/ubuntu/www/itasca/node_modules /home/ubuntu/www/itasca/static/css
 
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail
