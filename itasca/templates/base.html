@@ -19,6 +19,10 @@
     {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    {# Favicon #}
+    <link rel="icon" type="image/svg+xml" href="{% static 'src/itasca.svg' %}">
+    <link rel="alternate icon" href="{% static 'src/itasca.svg' %}">
+
     {# Force all links in the live preview panel to be opened in a new tab #}
     {% if request.in_preview_panel %}
     <base target="_blank">
