@@ -23,7 +23,12 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
     libjpeg62-turbo-dev \
     zlib1g-dev \
     libwebp-dev \
- && rm -rf /var/lib/apt/lists/*
+    curl \
+&& rm -rf /var/lib/apt/lists/*
+
+# Install Node.js (LTS version)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
 
 # Install the application server.
 RUN pip install "gunicorn==20.0.4"
@@ -45,6 +50,9 @@ COPY --chown=wagtail:wagtail . .
 
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail
+
+# Install npm dependencies and build CSS
+RUN npm install && npm run build:css
 
 # Collect static files.
 RUN python manage.py collectstatic --noinput --clear
