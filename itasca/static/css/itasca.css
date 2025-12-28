@@ -1118,6 +1118,26 @@ pre,
   transition-duration: 150ms;
 }
 
+/* Ensure text-justify and text-balance work properly - always included */
+
+p.text-justify,
+  .text-justify {
+  text-align: justify !important;
+}
+
+p.text-balance,
+  .text-balance {
+  text-wrap: balance;
+  /* Fallback for browsers that don't support text-wrap: balance */
+  text-wrap: pretty;
+}
+
+/* Specific rule for #about-us to ensure it works */
+
+#about-us.text-justify {
+  text-align: justify !important;
+}
+
 /* Custom styles can be added here */
 
 /** @import must precede all other statements */

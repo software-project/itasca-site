@@ -3,7 +3,7 @@ module.exports = {
   content: [
     './itasca/templates/**/*.html',
     './home/templates/**/*.html',
-    './blog/templates/blog/**/*.html',
+    './blog/templates/**/*.html',
     './search/templates/**/*.html',
   ],
   theme: {
