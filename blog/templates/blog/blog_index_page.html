@@ -30,7 +30,7 @@
                                 {% endwith %}
                             </div>
                             <h2 class="text-xl font-semibold text-navy mb-3 line-clamp-2"><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-                            <p class="text-navy/70 text-sm line-clamp-3">{{ post.specific.intro }}</p>
+                            <div class="text-navy/70 text-sm line-clamp-3">{{ post.specific.intro|richtext }}</div>
                         </div>
                         <div class="px-6 py-4 bg-coral/10 border-t border-coral/10">
                             <div class="flex items-center gap-4 text-xs text-navy/60 mb-4">

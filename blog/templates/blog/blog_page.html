@@ -93,9 +93,9 @@
                 {% image page.main_image width-800 class="w-full h-auto rounded-lg object-cover max-h-[500px] shadow-md" %}
             </div>
             {% endif %}
-            <article class="bg-white rounded-lg p-8 sm:p-12 prose prose-sm sm:prose max-w-none mb-12">
+            <article class="bg-white rounded-lg px-8 py-4 prose prose-sm sm:prose max-w-none sm:max-w-none mb-12">
                 <div class="text-navy">
-                    <div class="intro">{{ page.intro }}</div>
+                    <div class="intro">{{ page.intro|richtext }}</div>
                     <div class="text-justify text-balance">
                         {{ page.body|richtext }}
                     </div>

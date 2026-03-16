@@ -22,7 +22,7 @@ class BlogIndexPage(Page):
 
 class BlogPage(Page):
     date = models.DateField("Post date")
-    intro = models.CharField(max_length=250)
+    intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
     short_description = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
