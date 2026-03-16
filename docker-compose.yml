@@ -17,7 +17,7 @@ services:
       - "127.0.0.1:8000:8000"
     depends_on:
       - db
-    command: sh -c "npm run build:css && python manage.py collectstatic --noinput && gunicorn itasca.wsgi:application --bind 0.0.0.0:8000 --workers 3 --log-level debug --access-logfile - --error-logfile - --capture-output"
+    command: sh -c "npm run build:css && python manage.py collectstatic --noinput && python manage.py migrate --noinput && gunicorn itasca.wsgi:application --bind 0.0.0.0:8000 --workers 3 --log-level debug --access-logfile - --error-logfile - --capture-output"
 
   db:
     image: postgres:17
